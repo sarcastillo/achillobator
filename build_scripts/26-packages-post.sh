@@ -22,8 +22,11 @@ sed -i "/.*io.github.dvlv.boxbuddyrs.*/d" /etc/ublue-os/system-flatpaks.list
 
 # The compose repos we used during the build are point in time repos that are
 # not updated, so we don't want to leave them enabled.
-# FIXME: figure out why this is not working
-# dnf config-manager --set-disabled baseos-compose,appstream-compose
+dnf config-manager --set-disabled baseos-compose,appstream-compose
+
+# Add Flathub by default
+mkdir -p /etc/flatpak/remotes.d
+curl --retry 3 -o /etc/flatpak/remotes.d/flathub.flatpakrepo "https://dl.flathub.org/repo/flathub.flatpakrepo"
 
 # Generate initramfs image after installing Bluefin branding because of Plymouth subpackage
 # Add resume module so that hibernation works

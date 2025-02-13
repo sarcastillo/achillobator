@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euox pipefail
+set -xeuo pipefail
 
 # This is the base for a minimal GNOME system on CentOS Stream.
 
@@ -72,7 +72,8 @@ dnf -y install \
 dnf -y install \
 	plymouth \
 	plymouth-system-theme \
-	fwupd
+	fwupd \
+	systemd-{resolved,container,oomd}
 
 # This package adds "[systemd] Failed Units: *" to the bashrc startup
 dnf -y remove console-login-helper-messages
